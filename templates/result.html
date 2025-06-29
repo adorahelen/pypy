@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>분석 결과</title>
+</head>
+<body>
+    <h1>분석 결과</h1>
+    <ul>
+        {% for key, value in analysis.items() %}
+            {% if key == "링크 목록" %}
+                <li><strong>{{ key }}:</strong>
+                    <ul>
+                        {% for link in value %}
+                            <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <a href="/">← 다시 분석하기</a>
+</body>
+</html>
