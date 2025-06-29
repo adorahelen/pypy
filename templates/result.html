@@ -5,6 +5,12 @@
 </head>
 <body>
     <h1>분석 결과</h1>
+
+    <h2>이미지 미리보기 (최대 10개)</h2>
+    {% for img_src in analysis['이미지 목록'][:10] %}
+        <img src="{{ img_src }}" width="150" style="margin: 5px;">
+    {% endfor %}
+
     <ul>
         {% for key, value in analysis.items() %}
             {% if key == "링크 목록" %}
@@ -15,11 +21,46 @@
                         {% endfor %}
                     </ul>
                 </li>
-            {% else %}
+            {% elif key != "이미지 목록" %}
                 <li><strong>{{ key }}:</strong> {{ value }}</li>
             {% endif %}
         {% endfor %}
     </ul>
+
+        <h2>CSS 파일 목록</h2>
+    <ul>
+        {% for css in analysis['CSS 파일 목록'] %}
+            <li><a href="{{ css }}" target="_blank">{{ css }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>JavaScript 파일 목록</h2>
+    <ul>
+        {% for js in analysis['JS 파일 목록'] %}
+            <li><a href="{{ js }}" target="_blank">{{ js }}</a></li>
+        {% endfor %}
+    </ul>
+
+        <h2>robots.txt 내용</h2>
+    <pre>{{ analysis['robots.txt'] }}</pre>
+
+    <h2>sitemap.xml 내용</h2>
+    <pre>{{ analysis['sitemap.xml'] }}</pre>
+
+    <h2>위험한 JS 파일 분석 결과</h2>
+    {% if analysis['위험한 JS 분석 결과'] %}
+        <ul>
+        {% for js in analysis['위험한 JS 분석 결과'] %}
+            <li>
+                <strong>{{ js.url }}</strong> → 포함된 키워드:
+                {{ js.keywords|join(', ') }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>위험한 키워드가 발견되지 않았습니다.</p>
+    {% endif %}
+
     <a href="/">← 다시 분석하기</a>
 </body>
 </html>

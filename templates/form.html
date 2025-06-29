@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
 <head>
-    <title>웹 페이지 분석기</title>
+    <title>URL 분석기</title>
 </head>
 <body>
-    <h1>웹 페이지 분석기</h1>
+    <h1>분석할 웹사이트의 URL을 입력하세요</h1>
     {% if error %}
-        <p style="color:red">{{ error }}</p>
+        <p style="color: red;">{{ error }}</p>
     {% endif %}
-    <form method="POST">
-        <input type="text" name="url" placeholder="분석할 URL 입력" style="width:300px" required>
-        <button type="submit">분석하기</button>
+    <form method="post">
+        <input type="text" name="url" placeholder="https://example.com" style="width: 300px;">
+        <button type="submit">분석 시작</button>
     </form>
 </body>
 </html>
